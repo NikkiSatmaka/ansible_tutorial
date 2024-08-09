@@ -7,15 +7,15 @@
     - name: install updates (AlmaLinux)
       tags: always
       dnf:
-        update_only: yes
-        update_cache: yes
+        update_only: true
+        update_cache: true
       when: ansible_distribution == "AlmaLinux"
 
     - name: install updates (Debian)
       tags: always
       apt:
         upgrade: dist
-        update_cache: yes
+        update_cache: true
       when: ansible_distribution == "Debian"
 
 
@@ -31,7 +31,7 @@
       unarchive:
         src: https://releases.hashicorp.com/terraform/1.9.4/terraform_1.9.4_linux_amd64.zip
         dest: /usr/local/bin
-        remote_src: yes
+        remote_src: true
         mode: 0755
         owner: root
         group: root
