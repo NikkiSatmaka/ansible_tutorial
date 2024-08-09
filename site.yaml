@@ -23,15 +23,6 @@
   become: true
   tasks:
 
-    - name: install apache and php for Debian servers
-      tags: apache,apache2,debian
-      apt:
-        name:
-          - apache2
-          - libapache2-mod-php
-        state: latest
-      when: ansible_distribution == "Debian"
-
     - name: install apache and php for AlmaLinux servers
       tags: apache,httpd,almalinux
       dnf:
@@ -40,6 +31,15 @@
           - php
         state: latest
       when: ansible_distribution == "AlmaLinux"
+
+    - name: install apache and php for Debian servers
+      tags: apache,apache2,debian
+      apt:
+        name:
+          - apache2
+          - libapache2-mod-php
+        state: latest
+      when: ansible_distribution == "Debian"
 
     - name: copy default html file for site
       tags: apache,apache2,httpd
@@ -55,19 +55,19 @@
   become: true
   tasks: 
 
-    - name: install mariadb package (Debian)
-      tags: db,mariadb,debian
-      apt:
-        name: mariadb-server
-        state: latest
-      when: ansible_distribution == "Debian"
-
     - name: install mariadb package (AlmaLinux)
       tags: db,mariadb,almalinux
       dnf:
         name: mariadb
         state: latest
       when: ansible_distribution == "AlmaLinux"
+
+    - name: install mariadb package (Debian)
+      tags: db,mariadb,debian
+      apt:
+        name: mariadb-server
+        state: latest
+      when: ansible_distribution == "Debian"
 
 
 - hosts: file_servers
