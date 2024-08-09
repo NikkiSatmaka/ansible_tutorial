@@ -1,19 +1,17 @@
-- name: install apache and php for AlmaLinux servers
-  tags: apache,httpd,almalinux
-  dnf:
+- name: install apache and php packages
+  tags: apache,httpd,php
+  package:
     name:
-      - httpd
-      - php
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
     state: latest
-  when: ansible_distribution == "AlmaLinux"
 
-- name: start httpd (AlmaLinux)
-  tags: apache,httpd,almalinux
+- name: start and enable apache service
+  tags: apache,httpd
   service:
-    name: httpd
+    name: "{{ apache_service }}"
     state: started
     enabled: true
-  when: ansible_distribution == "AlmaLinux"
 
 - name: open port 80 (AlmaLinux)
   tags: apache,httpd,almalinux
@@ -21,15 +19,6 @@
     port: 80/tcp
     state: enabled
   when: ansible_distribution == "AlmaLinux"
-
-- name: install apache and php for Debian servers
-  tags: apache,apache2,debian
-  apt:
-    name:
-      - apache2
-      - libapache2-mod-php
-    state: latest
-  when: ansible_distribution == "Debian"
 
 - name: change e-mail address for admin
   tags: apache,httpd,almalinux
