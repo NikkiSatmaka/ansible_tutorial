@@ -50,6 +50,14 @@
         state: latest
       when: ansible_distribution == "AlmaLinux"
 
+    - name: start httpd (AlmaLinux)
+      tags: apache,httpd,almalinux
+      service:
+        name: httpd
+        state: started
+        enabled: true
+      when: ansible_distribution == "AlmaLinux"
+
     - name: install apache and php for Debian servers
       tags: apache,apache2,debian
       apt:
