@@ -18,6 +18,8 @@
   firewalld:
     port: 80/tcp
     state: enabled
+    permanent: true
+    immediate: true
   when: ansible_distribution == "AlmaLinux"
 
 - name: change e-mail address for admin
