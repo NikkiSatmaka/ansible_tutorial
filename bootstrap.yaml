@@ -33,7 +33,7 @@
       tags: always
       authorized_key:
         user: simone
-        key: ""
+        key: "{{ lookup('file', '/home/nikki/.ssh/ansible.pub') }}"
 
     - name: add sudoers file for simone
       tags: always
