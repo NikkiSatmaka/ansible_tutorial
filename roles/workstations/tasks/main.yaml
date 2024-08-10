@@ -11,3 +11,23 @@
     owner: root
     group: root
 
+- name: create system user semaphore
+  tags: semaphore
+  user:
+    system: true
+    name: semaphore
+    home: /home/semaphore
+
+- name: install mariadb package
+  tags: semaphore
+  package:
+    name: "{{ mariadb_package_name }}"
+    state: latest
+
+- name: start and enable mariadb service
+  tags: semaphore
+  service:
+    name: "{{ mariadb_service }}"
+    state: started
+    enabled: true
+
