@@ -43,3 +43,18 @@
     deb: https://github.com/semaphoreui/semaphore/releases/download/v2.10.22/semaphore_2.10.22_linux_amd64.deb
   when: ansible_distribution == "Debian"
 
+- name: copy semaphore service
+  tags: semaphore
+  copy:
+    src: default_semaphore.service
+    dest: /etc/systemd/system/semaphore.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: start and enable semaphore service
+  tags: semaphore
+  service:
+    name: semaphore
+    state: started
+    enabled: true
